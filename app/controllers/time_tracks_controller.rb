@@ -12,6 +12,10 @@ class TimeTracksController < ApplicationController
   end
 
   def new
+    @time_track = TimeTrack.new
+    respond_to do |format|
+      format.html
+    end
   end
 
   def update
