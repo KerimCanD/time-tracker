@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel"><%= params[:action].titleize %> Time Track</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+  <%= form_with(model: time_track, data: {remote: true}) do |form| %>
+    <div id="errors">
+      <% if time_track.errors.any? %>
+        <%= render 'errors', time_track: time_track %>
+      <% end %>
+    </div>
+
+    <div class="container">
+      <div class="input-group row">
+        <%= form.label :time_type, class: "col-2" %>
+        <%= form.text_field :time_type, {class: 'form-control col-6', style: "width: 60%;"} %>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="container">
+      <div class="input-group row">
+        <%= form.label :time_started, class: "col-2" %>
+        <%= form.datetime_select :time_started, {class: 'form-control datepicker col-6', style: "width: 60%;"} %>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="container">
+      <div class="input-group row">
+        <%= form.label :time_ended, class: "col-2" %>
+        <%= form.datetime_select :time_ended, {class: 'form-control datepicker col-6', style: "width: 60%;"} %>
+      </div>
+    </div>
+    
+    <br>
+
+    <div class="container">
+      <div class="input-group row">
+        <%= form.label :description, class: "col-2" %>
+        <%= form.text_area :description, {class: 'form-control col-9', style: "width: 60%;"} %>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="actions" style="text-align: center;">
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,54 @@
+<%= search_form_for @q, remote: true do |f| %>
+  <div class="row">
+    <div class="col-3">
+      <div class="input-group">
+        <%= f.datetime_field :time_started_gt, class: "form-control search-item" %>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="input-group">
+        <%= f.datetime_field :time_started_lt, class: "form-control search-item" %>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="input-group">
+        <%= f.datetime_field :time_ended_gt, class: "form-control search-item" %>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="input-group">
+        <%= f.datetime_field :time_ended_lt, class: "form-control search-item" %>
+      </div>
+    </div>
+  </div>
+  
+  <hr>
+  
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-3">
+      <div class="input-group">
+        <%= f.search_field :time_type_cont, class: "form-control search-item", placeholder: "Time Type" %>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="input-group">
+        <%= f.search_field :description_cont, class: "form-control search-item", placeholder: "Description" %>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-12" style="text-align: right;">
+      <a id="clean-button" class="btn btn-info">Clean Filters</a>
+      <%= f.submit "Search", class: "btn btn-secondary" %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $('#clean-button').on("click",function(){
+    $(".search-item").val('');
+  })
+</script>

@@ -1,0 +1,9 @@
+<div id="error_explanation">
+  <h6><%= pluralize(time_track.errors.count, "error") %> prohibited this time_track from being saved:</h2>
+
+  <ul>
+    <% time_track.errors.each do |error| %>
+      <li style="color: red;"><%= error.full_message.humanize %></li>
+    <% end %>
+  </ul>
+</div>

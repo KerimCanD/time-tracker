@@ -1,0 +1,7 @@
+<% if time_track.errors.any? %>
+    $('#errors').html("<%= j (render 'errors', time_track: time_track) %>")
+
+<% else %>
+    $('#formModal').modal('hide');
+    $('#table').html("<%= j (render 'list', time_tracks: TimeTrack.all )%>")
+<% end %>
