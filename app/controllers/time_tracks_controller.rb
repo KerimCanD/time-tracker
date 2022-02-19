@@ -1,17 +1,23 @@
 class TimeTracksController < ApplicationController
-  before_action :set_time_track, only: %i[ show edit update destroy ]
+  before_action :set_time_track, only: %i[ edit update destroy ]
 
   def index
-    @q = TimeTrack.ransack(params[:q])
-    @time_tracks = @q.result(distinct: true)
-    respond_to do |format|
-      format.html
-      format.js
+    if current_user.is_admin?
+      @q = TimeTrack.ransack(params[:q])
+      @time_tracks = @q.result(distinct: true)
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @q = current_user.time_tracks.ransack(params[:q])
+      @time_tracks = @q.result(distinct: true)
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
-    
-  end
-
-  def show
+      
   end
 
   def edit

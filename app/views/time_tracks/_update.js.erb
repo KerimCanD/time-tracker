@@ -3,5 +3,5 @@
 
 <% else %>
     $('#formModal').modal('hide');
-    $('#table').html("<%= j (render 'list', time_tracks: TimeTrack.all )%>")
+    $('#table').html("<%= j (render 'list', time_tracks: current_user.is_admin? ? TimeTrack.all : current_user.time_tracks )%>")
 <% end %>

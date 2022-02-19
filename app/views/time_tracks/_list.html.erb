@@ -1,6 +1,9 @@
 <table class="col-10 table table-hover" style="text-align: center;">
   <thead>
     <tr>
+      <% if current_user.is_admin? %>
+        <th>Username</th>
+      <% end %>
       <th>Time Started</th>
       <th>Time Ended</th>
       <th>Type</th>
@@ -11,6 +14,9 @@
   <tbody>
     <% time_tracks.each do |time_track| %>
       <tr>
+      <% if current_user.is_admin? %>
+        <td><%= time_track.try(:user).try(:name) %></td>
+      <% end %>
         <td><%= time_track.time_started.strftime("%d.%m.%Y %H:%M") %></td>
         <td><%= time_track.time_ended.strftime("%d.%m.%Y %H:%M") %></td>
         <td><%= time_track.time_type %></td>
