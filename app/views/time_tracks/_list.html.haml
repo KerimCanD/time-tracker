@@ -1,0 +1,22 @@
+%table.col-10.table.table-hover{:style => "text-align: center;"}
+  %thead
+    %tr
+      - if current_user.is_admin?
+        %th Username
+      %th Time Started
+      %th Time Ended
+      %th Type
+      %th Description
+      %th{:colspan => "2"} Actions
+  %tbody
+    - time_tracks.each do |time_track|
+      %tr
+        - if current_user.is_admin?
+          %td= time_track.try(:user).try(:name)
+        %td= time_track.time_started.strftime("%d.%m.%Y %H:%M")
+        %td= time_track.time_ended.strftime("%d.%m.%Y %H:%M")
+        %td= time_track.time_type
+        %td= time_track.description
+        %td
+          = link_to 'Edit', edit_time_track_path(time_track), remote: true, class: "btn btn-warning btn-sm"
+        %td= link_to 'Destroy', time_track, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"

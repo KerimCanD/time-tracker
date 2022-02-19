@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title TimeTracker
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %body{:style => "background-color: rgba(145, 147, 148, 0.247);"}
+    .container{:style => "background-color: white; height: 100vh"}
+      .container
+        %header.d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-md-between.py-3.mb-4.border-bottom
+          %a.d-flex.align-items-center.col-md-3.mb-2.mb-md-0.text-dark.text-decoration-none{:href => "/"}
+            %svg.bi.me-2{"aria-label" => "Bootstrap", :height => "32", :role => "img", :width => "40"}
+              %use{"xlink:href" => "#bootstrap"}
+          %ul.nav.col-12.col-md-auto.mb-2.justify-content-center.mb-md-0
+            %li= link_to "Home", root_path, class: "nav-link px-2 link-secondary"
+            %li= link_to "Time Tracks", time_tracks_path, class: "nav-link px-2 link-secondary"
+          .col-md-3.text-end
+            - if user_signed_in?
+              = current_user.email
+              = link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-primary", style: "margin-left: 10px;"
+            - else
+              = link_to "Login", new_user_session_path, class:"btn btn-outline-primary me-2"
+              = link_to "Sign Up", new_user_registration_path, class: "btn btn-primary"
+      = yield
+    #formModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :tabindex => "-1"}
+      .modal-dialog.modal-lg
+        .modal-content

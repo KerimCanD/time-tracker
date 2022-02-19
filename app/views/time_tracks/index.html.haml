@@ -1,0 +1,9 @@
+%p#notice= notice
+%br/
+%br/
+#filters{:style => "margin: 20px;"}
+  = render "filters"
+.container{:style => "text-align: right; padding-right: 10px;"}
+  = link_to "New Time Track", new_time_track_path, remote:true, class: "btn btn-primary"
+  #table{:style => "padding-top: 20px;"}
+    = render "list", time_tracks: @time_tracks

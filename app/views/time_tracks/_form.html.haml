@@ -1,0 +1,32 @@
+.modal-header
+  %h5#exampleModalLabel.modal-title
+    = params[:action].titleize
+    Time Track
+  %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
+.modal-body
+  = form_with(model: time_track, data: {remote: true}) do |form|
+    #errors
+      - if time_track.errors.any?
+        = render 'errors', time_track: time_track
+    .container
+      .input-group.row
+        = form.label :time_type, class: "col-2"
+        = form.text_field :time_type, {class: 'form-control col-6', style: "width: 60%;"}
+    %br/
+    .container
+      .input-group.row
+        = form.label :time_started, class: "col-2"
+        = form.datetime_select :time_started, {class: 'form-control datepicker col-6', style: "width: 60%;"}
+    %br/
+    .container
+      .input-group.row
+        = form.label :time_ended, class: "col-2"
+        = form.datetime_select :time_ended, {class: 'form-control datepicker col-6', style: "width: 60%;"}
+    %br/
+    .container
+      .input-group.row
+        = form.label :description, class: "col-2"
+        = form.text_area :description, {class: 'form-control col-9', style: "width: 60%;"}
+    %br/
+    .actions{:style => "text-align: center;"}
+      = form.submit class: 'btn btn-primary'

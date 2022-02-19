@@ -1,4 +1,4 @@
-$('#formModal').find(".modal-content").html("<%= j (render 'form', time_track: @time_track )%>")
+$('#formModal').find(".modal-content").html("#{j (render 'form', time_track: @time_track )}")
 $('#formModal').modal('toggle');
 $('#formModal').modal('show');
 $('select').addClass('form-control')

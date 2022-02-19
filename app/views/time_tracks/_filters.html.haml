@@ -1,0 +1,39 @@
+= search_form_for @q, remote: true do |f|
+  .row
+    .col-3
+      .input-group
+        = f.datetime_field :time_started_gt, class: "form-control search-item"
+    .col-3
+      .input-group
+        = f.datetime_field :time_started_lt, class: "form-control search-item"
+    .col-3
+      .input-group
+        = f.datetime_field :time_ended_gt, class: "form-control search-item"
+    .col-3
+      .input-group
+        = f.datetime_field :time_ended_lt, class: "form-control search-item"
+  %hr/
+  .row
+    .col-3
+    .col-3
+      .input-group
+        = f.search_field :time_type_cont, class: "form-control search-item", placeholder: "Time Type"
+    .col-3
+      .input-group
+        = f.search_field :description_cont, class: "form-control search-item", placeholder: "Description"
+  - if current_user.is_admin?
+    %hr/
+    .row
+      .col-12{:style => "text-align: center;"}
+        = f.select :user_name_cont, options_for_select(User.pluck(:name)), class: "form-select search-item", include_blank: "User's Name"
+  %br/
+  .row
+    .col-12{:style => "text-align: right;"}
+      %a#clean-button.btn.btn-info Clean Filters
+      = f.submit "Search", class: "btn btn-secondary", id: "submit"
+:javascript
+  $("select").addClass("form-select")
+  $('#clean-button').on("click",function(){
+    $(".search-item").val('');
+    $('#submit').click();
+  })

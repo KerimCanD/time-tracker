@@ -1,0 +1,30 @@
+%main.main{:role => "main", :style => "margin-top: 200px;"}
+  %section.section.page-section
+    .container
+      .row
+        .col-md-4.offset-md-4
+          .card
+            .card-header
+              Login
+            .card-body
+              = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+                .form-group
+                  .field
+                    = f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control", placeholder: "E-Mail"
+                %br/
+                .form-group
+                  .field
+                    = f.password_field :password, autocomplete: "current-password" , class: "form-control", placeholder: "Password"
+                %br/
+                .form-group.custom-control.custom-checkbox
+                  .row
+                    .col
+                      - if devise_mapping.rememberable?
+                        .field
+                          = f.check_box :remember_me, style: "margin-left: 50px; margin-top: 10px;"
+                          %label.custom-control-label{:for => "rememberMe", :name => "rememberMe"} Remember Me
+                          %div{:style => "float: right; width: 40%;"}
+                            = f.submit "Log in", style: "float: left;"
+                %br/
+            .card-footer.text-center
+              = render "devise/shared/links"
